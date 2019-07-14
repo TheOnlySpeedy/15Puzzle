@@ -75,6 +75,16 @@ public class SlidePuzzle : MonoBehaviour
             } else if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) {
                 Move(Vector3.right);
             }
+
+            if (Input.GetMouseButtonUp(0)) {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100f, LayerMask.GetMask("Block"))) {
+                    SlideBlock hitBlock = hit.transform.GetComponent<SlideBlock>();
+                    CheckBlock(hitBlock);
+                }
+            }
         }
     }
 
@@ -171,6 +181,16 @@ public class SlidePuzzle : MonoBehaviour
             }
             MoveCount++;
             CheckFinished();
+        }
+    }
+
+    void CheckBlock(SlideBlock block) {
+        Vector3[] directions = new Vector3[4] {Vector3.forward, Vector3.back, Vector3.left, Vector3.right};
+        foreach (Vector3 dir in directions)
+        {
+            if (block.CheckCanMove(dir)) {
+                MoveBlock(block, dir);
+            }
         }
     }
 

@@ -759,7 +759,7 @@ MonoBehaviour:
   width: 4
   height: 4
   shuffleCount: 250
-  maxShuffleFramePause: 10
+  maxShuffleFramePause: 5
   slideBlockPrefab: {fileID: 5366358368120696636, guid: b0472756ee9d880479a2f8e7d711a79c,
     type: 3}
   movesText: {fileID: 1392671067}
